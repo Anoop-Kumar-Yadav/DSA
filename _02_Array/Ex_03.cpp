@@ -25,7 +25,7 @@ int main() {
 
     vector<int> v2(v1.size(),0);
     for (int i = 0; i < v2.size(); i++) {
-        v2.at(i) = v1.at(v1.size()-i-1);
+        v2.at(i) = v1.at(v1.size()-1-i);
     }
 
     display(v1);

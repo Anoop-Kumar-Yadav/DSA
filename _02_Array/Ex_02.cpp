@@ -22,8 +22,8 @@ int main() {
     cin>>target;
 
     int size = v.size();
-    for (int i = 0; i <= size-2; i++) {
-        for (int j = i+1; j <= size-1; j++) {
+    for (int i = 0; i < size-1; i++) { 
+        for (int j = i+1; j < size; j++) {
             if(v[i]+v[j] == target) cout<<"Index : "<<i<<" & "<<j<<endl;
         }
         

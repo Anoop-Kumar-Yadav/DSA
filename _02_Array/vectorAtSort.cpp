@@ -1,33 +1,32 @@
 #include <iostream>
 #include <vector>
+#include <algorithm> // Required for std::sort
 
 using namespace std;
 
-
-void change(vector<int> v){
-    v.at(2) = 5;
-}
-
 int main() {
+
     vector<int> v;
-    v.push_back(10);
-    v.push_back(11);
-    v.push_back(13);
-    v.push_back(15);
-    v.push_back(17);
+    for (int i = 0; i < 5; i++) {
+        v.push_back(i);
+    }
+    cout<<v.at(2)<<endl; // value at index 2   
+    v.at(2) = 5;    // Update at value index 2
 
+    //Print
     for (int i = 0; i < v.size(); i++) {
         cout<<v.at(i)<<" ";
     }
     cout<<endl;
 
-    change(v);
+    // Sort
+    sort(v.begin(),v.end());
 
+    //Print
     for (int i = 0; i < v.size(); i++) {
         cout<<v.at(i)<<" ";
     }
     cout<<endl;
-    
 
     return 0;
 }

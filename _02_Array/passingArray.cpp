@@ -12,7 +12,7 @@ void display(int arr[],int size){ // pointer of first element is passed
     }
     cout<<endl;
 }
-
+ 
 
 void change(int b[]){
     b[0] = 100; // *b = 100  value updated in original array
