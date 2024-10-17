@@ -18,6 +18,39 @@ void reversePart(int i,int j,vector<int>& v){
     }
 }
 
+/*  METHOD - 1
+    # The last element of the vector moves to the front.
+    # All other elements are shifted one position to the right.
+    # The original first element moves to the second position.
+*/
+void rotation_method_1(vector<int>& v, int rot_value_){
+
+    for (int i = 0; i < rot_value_ ; i++) {
+        int x = v.at(0);
+        v.at(0) = v.at(v.size()-1);
+
+        for (int j = v.size()-1; j >= 2; j--) {
+            v.at(j) = v.at(j-1);
+        }
+        v.at(1) = x;
+    }
+
+
+}
+
+/*
+  METHOD-2 
+  # Reverse the last rot_value_ elements
+  # Reverse the first (n - rot_value_) elements
+  # Reverse the entire vector
+*/
+void rotation_method_2(vector<int>& v, int rot_value_){
+    reversePart(v.size() - rot_value_,v.size()-1,v); 
+    reversePart(0,v.size() - rot_value_-1,v);        
+    reversePart(0,v.size()-1,v);                     
+}
+
+
 int main() {
     
     vector<int> v;
@@ -33,30 +66,17 @@ int main() {
     cout<<"Enter Rotation Value : ";cin>>k;
 
     if (k > v.size()) k = k % v.size();
-// METHOD-1 : (My First Attempt)--------------------------------------------------------
-    for (int i = 0; i < k; i++) {
-        int x = v.at(0);
-        v.at(0) = v.at(v.size()-1);
 
-        for (int j = v.size()-1; j >= 2; j--) {
-            v.at(j) = v.at(j-1);
-        }
-        v.at(1) = x;
-    }
-
-// METHOD-2 : (Attempt After Hint)--------------------------------------------------------
-//     reversePart(v.size()-k,v.size()-1,v);
-//     reversePart(0,v.size()-k-1,v);
-//     reversePart(0,v.size()-1,v);
-//     //print
-//     for (int i = 0; i < v.size(); i++) {
-//         cout<<v[i]<<" ";
-//     }  
-//     cout<<endl;
+    rotation_method_2(v,k);
+    // print
+    for (int i = 0; i < v.size(); i++) {
+        cout<<v[i]<<" ";
+    }  
+    cout<<endl;
 
 //     return 0;
 // }
-
+}
 /*
 Author: Your Name
 Date: Date

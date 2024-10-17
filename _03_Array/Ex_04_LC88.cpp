@@ -34,21 +34,31 @@ void display(vector<int> v){
     }  
     cout<<endl;  
 }
-void mergeSortSortedArray(vector<int>& nums1 , vector<int>& nums2){
-    int m = (nums1.size()-nums2.size());
-    int n = nums2.size();
+
+/*
+  METHOD - 1 : 
+  # The goal is to compare elements from the end of nums1 and nums2,
+    placing the larger element at the end of nums1 in each iteration.
+  # If there are any remaining elements in nums2 (i.e., if j >= 0), place them in nums1
+*/
+void mergeSortSortedArray(vector<int>& nums1 , vector<int>& nums2){ 
+    int m = (nums1.size()-nums2.size()); // The number of valid elements in nums1 (i.e., excluding the extra space).
+    int n = nums2.size();   //The number of elements in nums2.
     
-    int i = m-1;
-    int j = n-1;
-    int k = m+n-1;
+    int i = m-1;    // A pointer for the last valid element in nums1.
+    int j = n-1;    // A pointer for the last element in nums2.
+    int k = m+n-1;  // A pointer for the last position in the final merged array, starting from the end of nums1
 
     while (i >= 0 && j >= 0){
+        
         if (nums1[i]>nums2[j]){
             nums1[k] = nums1[i];
             i--;
+
         } else if (nums2[j] > nums1[i]){
             nums1[k] = nums2[j];
             j--;
+
         } else {
             nums1[k] = nums1[i];
             k--;
@@ -58,6 +68,7 @@ void mergeSortSortedArray(vector<int>& nums1 , vector<int>& nums2){
         }
         k--;
     }
+    // STEP - 2
     while (j >=0 ){
         nums1[k] = nums2[j];
         j--;

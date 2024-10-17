@@ -13,39 +13,45 @@ void display(vector<int> v){
     cout<<endl;  
 }
 
-// METHOD-1 : iF MORE THAN ONE TRAVERSAL IS ALLOWED --------------------------------------------------------
+/* 
+    METHOD-1 : iF MORE THAN ONE TRAVERSAL IS ALLOWED
+  # Counting 0's 
+  # Make all element = 1.
+  # Placing all 0 at starting .
+*/
 void sort01METHOD1(vector<int>& v){
     int zero = 0;
-    int one = 0;
-    for (int i = 0; i < v.size()-1; i++) {
+
+    for (int i = 0; i < v.size()-1; i++) { 
         if (v.at(i) == 0 ){
-            zero++;
-            v.at(i)= 1;
+            zero++;     // Step - 1
+            v.at(i)= 1; // Step - 2
         }
-        else if (v.at(i)==1){
-            one++;
-            
-        }
-    }
-    // Filling Element
+
     for (int i = 0; i < zero; i++) {
-        v.at(i) = 0;
+        v.at(i) = 0; // Step - 3
+        }
     }
 }
 
-// METHOD-1 : ONLY ONE TRAVERSAL IS ALLOWED --------------------------------------------------------
+/*
+    METHOD-1 : ONLY ONE TRAVERSAL IS ALLOWED
+  # Skip i if 0 ,move forward
+  # Skip j if 1 ,move forward
+  # Replace if i=1 & j=0 ,move forward
+*/
 void sort01METHOD2(vector<int>& v){
     int i ,j;
     i = 0 ;
     j = v.size()-1;
 
     while(i<j){
-        if (v.at(i) == 0) i++;
-        if (v.at(j) == 1) j--;
+        if (v.at(i) == 0) i++; // Skip if 0 ,move forward
+        if (v.at(j) == 1) j--; // Skip if 1 ,move forward
 
-        //if (i>j) break;
+        //if (i>=j) break;
 
-        else if (v.at(i) == 1 & v.at(j) == 0){
+        else if (v.at(i) == 1 & v.at(j) == 0){ // Replace if i=1 & j=0 ,move forward
             v.at(i) = 0 ;
             v.at(j) = 1 ;
             i++;

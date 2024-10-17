@@ -14,14 +14,20 @@ void display(vector<int> v){
     cout<<endl;  
 }
 
+/*
+    METHOD-1 : ONLY ONE TRAVERSAL
+  # Skip i if negative ,move forward
+  # Skip j if positive ,move forward
+  # Replace if i=1 & j=0 ,move forward
+*/
 void moveNegPos(vector<int>& v){
     int i = 0;
     int j = v.size()-1;
 
     while(i<j){
-        if (v.at(i)<0) i++;
-        if (v.at(j)>0) j--;
-        else if (v.at(i)>0 && v.at(j)<0){
+        if (v.at(i)<0) i++; // Skip if negative ,move forward
+        if (v.at(j)>0) j--; // Skip if positive ,move forward
+        else if (v.at(i)>0 && v.at(j)<0){ // Replace if i=positive & j=negative ,move forward
             int temp = v.at(j);
             v.at(j) = v.at(i);
             v.at(i) = temp;

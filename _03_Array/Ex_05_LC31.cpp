@@ -26,28 +26,37 @@ void display(vector<int> v){
     cout<<endl;  
 }
 void nextPermutation(vector<int>& nums) {
+
     int pivot = -1;
+    // This identifies the point where the increasing order breaks.
     for (int i = nums.size() -2; i >= 0 ; i--){
         if (nums[i]<nums[i+1]){
             pivot = i;
             break;
         }
     }
-    if (pivot == -1 ) { // If Array is largest
+    // If no pivot is found --> the array is already the largest possible permutation
+    // In this case, we reverse the entire array to get the smallest permutation.
+    if (pivot == -1 ) { 
         reverse(nums.begin(),nums.end());
         return;
     }
 
+    //This ensures that the part after the pivot is the smallest possible sequence 
     reverse(nums.begin()+pivot+1,nums.end());
-    //find just greator
+
+    // find the smallest number that is greater than PIVOT ELEMENT .
     int justGreat_ = -1;
     for (int i = pivot+1; i < nums.size(); i++) {
+
         if (nums[i]>nums[pivot]){
             justGreat_ = i;
             break;
 
         }
     }
+
+    // Swapping the pivot element and Just greater element
     int temp = nums[pivot];
     nums[pivot] = nums[justGreat_];
     nums[justGreat_] = temp;

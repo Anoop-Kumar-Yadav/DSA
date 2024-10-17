@@ -8,6 +8,31 @@
 
 using namespace std;
 
+void reversal_1(vector<int>& v){ // MEDTHOD -1 
+    int i = 0;
+    int j = v.size()-1;
+    while ( i <= j ){
+        int temp = v[i];
+        v[i] = v[j];
+        v[j] = temp;
+        i++ ;
+        j-- ;
+    }   
+}
+
+void reversal_2(vector<int>& v){ // METHOD -1 Using for loop
+    for (int i = 0 , j = v.size()-1; i <= j; i++,j--) {
+        int temp = v[i];
+        v[i] = v[j];
+        v[j] = temp;
+    }
+}
+
+void reversal_3(vector<int>& v){ // METHOD -2 Using Built-In Function (Not Recommended not mention to use)
+    reverse(v.begin(),v.end());
+}
+
+
 int main() {
     
     vector<int> v(5);
@@ -21,37 +46,6 @@ int main() {
         cout<<v.at(i)<<" ";
     }
     cout<<endl;
-//  METHOD-1 (Not Recommended) : --------------------------------------------------------
-/*
-    int temp;
-    for (int i = 0; i < v.size()/2; i++) {
-        temp = v.at(v.size()-1-i);
-        v.at(v.size()-1-i) = v.at(i);
-        v.at(i) = temp;
-    }
-*/
-//  METHOD-2 : --------------------------------------------------------
-/*
-    int i = 0;
-    int j = v.size()-1
-    while ( i <= j ){
-        int temp = v[i];
-        v[i] = v[j];
-        v[j] = temp;
-        i++ ;
-        j-- ;
-    }
-*/
-//  METHOD-3 : --------------------------------------------------------
-
-    for (int i = 0 , j = v.size()-1; i <= j; i++,j--) {
-        int temp = v[i];
-        v[i] = v[j];
-        v[j] = temp;
-    }
-//  METHOD-4 : (Built-In-Function) --------------------------------------------------------
-    // reverse(v.begin(),v.end());
-  
 
 /*
          Swapping using XOR
@@ -65,7 +59,7 @@ int main() {
     a = a - b; // a becomes 10 (15 - 5) , (a+b) - a = b
 
 */
-
+    reversal_2(v);
     cout<<"Reverse : ";
     for (int i = 0; i < v.size(); i++) {
         cout<<v.at(i)<<" ";

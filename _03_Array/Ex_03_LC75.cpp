@@ -41,7 +41,7 @@ void display(vector<int> v){
     cout<<endl;  
 }
 
-//METHOD-1 : --------------------------------------------------------
+//METHOD-1 : (Using Sorting) --------------------------------------------------------
 void sortColors(vector<int>& nums) {
     int size = nums.size();
     for(int i = 0 ; i < size-1;i++){
@@ -55,7 +55,7 @@ void sortColors(vector<int>& nums) {
     }
 }
  
-//METHOD-2 : (TWO PASS Algo)--------------------------------------------------------
+//METHOD-2 : (TWO PASS Algo : Count & Place)--------------------------------------------------------
 void newSortColors(vector<int>& nums) {
     int size = nums.size();
     int zero = 0;
@@ -74,29 +74,40 @@ void newSortColors(vector<int>& nums) {
         else nums[i]=2;
         }
 }
-//METHOD-3 : (ONE PASS Algo-Dutch Flag Algo)--------------------------------------------------------
+//METHOD-3 : (ONE PASS : Algo-Dutch Flag Algo)--------------------------------------------------------
+/*
+
+# 0 -> low-1: All elements in this segment will be 0.
+# low -> mid-1: All elements in this segment will be 1.
+# mid -> high: This segment is being processed.
+# high + 1 -> end: All elements in this segment will be 2.
+
+*/
 void optmSortColors(vector<int>& nums){
-    int low = 0;
-    int mid = 0;
-    int high = nums.size()-1;
-    // mid ke baare me socho
-    // 0 -> low-1 = 0
-    // high + 1 -> end = 2
-    // low  -> mid - 1 =1
-    while(mid<=high){
-        if (nums[mid] == 2){
-            int temp = nums[mid];
+    int low = 0;    // It keeps track of where the 0s should be placed.
+    int mid = 0;    // It traverses the array and processes each element.
+    int high = nums.size()-1;   // It keeps track of where the 2s should be placed.
+
+    while(mid<=high){  // The loop runs until the mid pointer crosses the high pointer
+
+        // If the current element is 2, swap it with the element at the high position.
+        if (nums[mid] == 2){        
+            int temp = nums[mid];   
             nums[mid] = nums[high];
             nums[high] = temp;
-            high--;
+            high--;         //Decrement high because the last elements should be 2s ,
+                            // After the swap, mid is not incremented because we need to check the newly swapped element at the mid position.
         }
-        else if  (nums[mid] == 0){
+        // If the current element is 0, swap it with the element at the low position.
+        else if  (nums[mid] == 0){  
             int temp = nums[mid];
-            nums[mid] == nums[low];
-            nums[low] == temp;
-            mid++;
-            low++;
-        }else mid++;
+            nums[mid] = nums[low];
+            nums[low] = temp;
+            mid++;   // Increment both low and mid because the 0 is now in the correct position, 
+            low++;   // and we move forward to check the next elements.
+
+        }else 
+            mid++; // If the current element is 1, just increment mid because 1s are already in their correct positions.
         
     }
 
